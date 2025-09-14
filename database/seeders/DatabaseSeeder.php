@@ -39,19 +39,21 @@ class DatabaseSeeder extends Seeder
             $users = User::inRandomOrder()->limit(rand(2, 5))->pluck('id');
             $group->users()->attach(array_unique([1, ...$users]));
         }
-        Message::factory()->create();
+        Message::factory(count: 50)->create();
         // take only 1 to 1 mesagges
         $messages = Message::whereNull('group_id')->orderBy('created_at')->get();
-        
-        $conversations = $messages->GroupBy(function ($message){
-            return collect([$message->sender_id , $message->reciever_id])->sort()->implode("_");
-        })->map(function ($groupedMessages){
+        // $table->foreignId('sender_id')->constrained('users');
+        // $table->foreignId('reciever_id')->nullable()->constrained('users');
+        // $table->foreignId('conversation_id')->nullable()->constrained('conversations');
+        $conversations = $messages->GroupBy(function ($message) {
+            return collect([$message->sender_id, $message->reciever_id])->sort()->implode("_");// 1_2, 1_3, 2,3
+        })->map(function ($groupedMessages) {
             return [
-                'user_id1'=>$groupedMessages->first()->sender_id,
-                'user_id2'=>$groupedMessages->first()->reciever_id,
-                'last_message_id'=>$groupedMessages->last()->id,
-                'created_at'=>new Carbon(),
-                'updated_at'=>new Carbon(),
+                'user_id1' => $groupedMessages->first()->sender_id,
+                'user_id2' => $groupedMessages->first()->reciever_id,
+                'last_message_id' => $groupedMessages->last()->id,
+                'created_at' => new Carbon(),
+                'updated_at' => new Carbon(),
 
             ];
         })->values();
