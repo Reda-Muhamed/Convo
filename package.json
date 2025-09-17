@@ -33,6 +33,7 @@
         "@heroicons/react": "^2.2.0",
         "daisyui": "^5.1.10",
         "emoji-picker-react": "^4.13.3",
+        "lucide-react": "^0.544.0",
         "react-markdown": "^10.1.0",
         "uuid": "^13.0.0"
     }
