@@ -2,7 +2,7 @@ import React from "react";
 
 interface UserAvatarProps {
     user: any;
-    online: boolean;
+    online?: boolean;
     profile?: boolean;
 }
 

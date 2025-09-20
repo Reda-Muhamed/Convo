@@ -11,9 +11,26 @@ export default function AuthenticatedLayout({
 }: PropsWithChildren<{ header?: ReactNode }>) {
 
     const user = usePage().props.auth.user;
-
+    const conversations:any = usePage().props.conversations;
+    console.log(conversations)
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
+    useEffect(() => {
+        conversations.forEach((conversation:any) => {
+            let channel = `message.group.${conversation.id}`;
+            if(conversation.is_user){
+                channel = `message.user.${[
+                    parseInt(user.id)
+                ]}`
+            }
+
+
+        });
+
+
+
+    }, [conversations])
+
 
     return (
         <div className="h-screen bg-gray-100 dark:bg-gray-900 text-white min-h-screen flex flex-col">
@@ -174,7 +191,7 @@ export default function AuthenticatedLayout({
                 </header>
             )}
 
-           {children}
+            {children}
         </div>
     );
 }

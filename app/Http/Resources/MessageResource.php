@@ -8,7 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class MessageResource extends JsonResource
 {
-    public static $wrap=false;
+    public static $wrap = false;
     /**
      * Transform the resource into an array.
      *

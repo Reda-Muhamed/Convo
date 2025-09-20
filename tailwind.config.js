@@ -17,8 +17,17 @@ export default {
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
             },
         },
+        screens: {
+            xs: "420px",
+            sm: "680px",
+            md: "768px",
+            lg: "1024px",
+            xl: "1280px",
+            "2xl": "1536px",
+        },
     },
     daisyui: {
+        darkTheme: "dark",
         styled: true, // تفعيل كل الـ styles
         themes: [
             {
@@ -56,6 +65,7 @@ export default {
             "cupcake", // ثيم جاهز من daisyUI
             "bumblebee",
             "corporate",
+            "forest",
         ],
         darkTheme: "dark", // الثيم الافتراضي لما يكون dark
         base: true, // تفعيل base styles (reset)

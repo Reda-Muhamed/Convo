@@ -20,19 +20,19 @@ class MessageController extends Controller
     public function byUser(User $user)
     {
         $messages = Message::where(function ($q) use ($user) {
-            $q->where('sender_id', auth()->id)
+            $q->where('sender_id', auth()->id())
                 ->where('reciever_id', $user->id);
         })
             ->orWhere(function ($q) use ($user) {
                 $q->where('sender_id', $user->id)
-                    ->where('reciever_id', auth()->id);
+                    ->where('reciever_id', auth()->id());
             })
             ->latest()
             ->paginate(50);
 
         return Inertia::render('Home', [
             'selectedConversation' => $user->toConversationArray(),
-            'messages' => MessageResource::collection($messages)
+            'messages' => MessageResource::collection($messages)->resolve()
         ]);
     }
     public function byGroup(Group $group)
